@@ -163,11 +163,8 @@ def detect(save_img=False):
                 green = 0, 255, 0
                 orange = 0, 127, 255
 
-                # Toplam insan sayısını sağ üst köşeye ekle
-                if total_people >= 10:
-                    cv2.putText(im0, f'insan: {total_people}', (im0.shape[1] - 200, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, red, 2)
-                else:
-                    cv2.putText(im0, f'insan: {total_people}', (im0.shape[1] - 200, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, green, 2)
+                # Prints total detected objects on the top right.
+                cv2.putText(im0, f'Total: {total_people}', (im0.shape[1] - 500, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, red, 2)
 
                 for group in grouped_boxes:
                     box_count = len(group)
@@ -178,14 +175,8 @@ def detect(save_img=False):
                     y_max = max([box[3] for box in group])
 
 
-                    label = f'{box_count} insan'
-                    if box_count >= 5:
-                        plot_one_box([x_min, y_min, x_max, y_max], im0, color=red, line_thickness=2)
-                        cv2.putText(im0, label, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, red, 2)
-                    elif box_count == 4 or box_count == 3:
-                        plot_one_box([x_min, y_min, x_max, y_max], im0, color=orange, line_thickness=2)
-                        cv2.putText(im0, label, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, orange, 2)
-                    elif box_count == 2:
+                    label = f'{box_count} Objects'
+                    if box_count > 1:
                         plot_one_box([x_min, y_min, x_max, y_max], im0, color=green, line_thickness=2)
                         cv2.putText(im0, label, (int(x_min), int(y_min) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.75, green, 2)
 
