@@ -174,7 +174,7 @@ def detect(save_img=False):
                     x_max = max([box[2] for box in group])
                     y_max = max([box[3] for box in group])
 
-
+                    # If bounding boxes are collided create a bigger box surrounding them. And prints how many objects collide with each other on top of the box.
                     label = f'{box_count} Objects'
                     if box_count > 1:
                         plot_one_box([x_min, y_min, x_max, y_max], im0, color=green, line_thickness=2)
